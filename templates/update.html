@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Task Master</title>
+{% endblock %}
+
+{% block body %}
+<div class="content">
+    <h1 style="text-align: center">Update Resource</h1>
+    <h3 style="text-align: center"> Updating {{task.content}}</h3>
+
+    <div class="form">
+        <form action="/update/{{task.id}}" method="POST">
+            <input type="text" name="owner" id="owner" placeholder="Owner">
+            <input type="text" name="comment" id="comment" placeholder="Comment">
+            <select id="status" name="status">
+                <option value="available">Available</option>
+                <option value="busy">Busy</option>
+                <option value="unknown">unknown</option>
+              </select>
+            <input type="submit" value="Update">
+        </form>
+    </div>
+</div>
+{% endblock %}

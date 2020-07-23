@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>SSL resource manager</title>
+{% endblock %}
+
+{% block body %}
+<div class="content">
+    <h1 style="text-align: center">SSL Resource Manager </h1>
+    {% if tasks|length < 1 %}
+    <h4 style="text-align: center">There are no resources. Add one below!</h4>
+    {% else %}
+    <table>
+        <tr>
+            <th>NSIP</th>
+            <th>Platform</th>
+            <th>Last updated</th>
+            <th> Owner</th>
+            <th> Status</th>
+            <th> Comment</th>
+            <th>Actions</th>
+        </tr>
+        {% for task in tasks %}
+            <tr>
+                <td>{{ task.content }}</td>
+                <td>{{ task.platform }}</td>
+                <td>{{ task.last_updated }}</td>
+                <td>{{ task.owner }}</td>
+                <td>{{ task.status }}</td>
+                <td>{{ task.comment }}</td>
+                <td>
+                    <a href="/delete/{{task.id}}">Delete</a>
+                    <br>
+                    <a href="/update/{{task.id}}">Update</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+    <br>
+    <h3>Add a resource</h3>
+         <form action="/" method="POST">
+            <input type="text" name="content" id="content" placeholder="NSIP *">
+            <input type="text" name="type" id="type" placeholder="Platform *">
+            <input type="text" name="comment" id="comment" placeholder="Comment">
+            <input type="text" name="owner" id="owner" placeholder="Owner">
+            <select id="status" name="status">
+                <option value="available">Available</option>
+                <option value="busy">Busy</option>
+                <option value="unknown">unknown</option>
+              </select>
+            <br>
+            <input type="submit" value="Add resource">
+        </form>
+   </div>
+{% endblock %}
